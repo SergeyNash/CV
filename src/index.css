@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom DOS-style fonts and elements */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+@layer base {
+  body {
+    font-family: 'Courier New', 'Courier Prime', monospace;
+    background-color: #0000aa;
+    overflow: hidden;
+  }
+  
+  /* Custom scrollbar for DOS feel */
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #000080;
+    border: 1px solid #00ffff;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #008080;
+    border: 1px solid #00ffff;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00ffff;
+  }
+  
+  /* Custom selection colors */
+  ::selection {
+    background: #ffff00;
+    color: #000000;
+  }
+  
+  ::-moz-selection {
+    background: #ffff00;
+    color: #000000;
+  }
+}
+
+@layer components {
+  /* DOS Window style */
+  .dos-window {
+    border: 2px solid #00ffff;
+    background: #0000aa;
+    box-shadow: 
+      inset 1px 1px 0 rgba(255, 255, 255, 0.3),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  /* DOS Button style */
+  .dos-button {
+    border: 1px solid #00ffff;
+    background: #000080;
+    color: #ffffff;
+    padding: 2px 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    transition: all 0.1s;
+  }
+  
+  .dos-button:hover {
+    background: #00ffff;
+    color: #000000;
+  }
+  
+  .dos-button:active {
+    transform: translateY(1px);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Blinking cursor animation */
+  .cursor-blink {
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  /* ASCII art enhancement */
+  .ascii-art {
+    line-height: 1;
+    letter-spacing: 0;
+    white-space: pre;
+    font-family: 'Courier New', monospace;
+  }
+  
+  /* File system tree enhancements */
+  .file-item:hover {
+    background: linear-gradient(90deg, #000080 0%, #0000ff 100%);
+    box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.3);
+  }
+  
+  .file-item.selected {
+    background: linear-gradient(90deg, #ffff00 0%, #ffd700 100%);
+    color: #000000;
+    box-shadow: 
+      0 0 5px rgba(255, 255, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Mobile adaptations */
+  @media (max-width: 768px) {
+    .dos-mobile-nav {
+      background: rgba(0, 0, 170, 0.95);
+      backdrop-filter: blur(5px);
+    }
+  }
+  
+  /* Custom DOS-style progress bars */
+  .progress-bar {
+    background: #000080;
+    border: 1px solid #00ffff;
+    height: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    background: linear-gradient(90deg, #00ff00, #008000);
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  
+  /* Text effects for retro feel */
+  .retro-glow {
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor;
+  }
+  
+  .scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      transparent 50%,
+      rgba(0, 255, 0, 0.03) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    animation: scanlines 0.1s linear infinite;
+  }
+  
+  @keyframes scanlines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-dos-green {
+    color: #00ff00;
+  }
+  
+  .text-dos-cyan {
+    color: #00ffff;
+  }
+  
+  .text-dos-yellow {
+    color: #ffff00;
+  }
+  
+  .bg-dos-blue {
+    background-color: #0000aa;
+  }
+  
+  .bg-dos-dark-blue {
+    background-color: #000080;
+  }
+  
+  .border-dos-cyan {
+    border-color: #00ffff;
+  }
+}
