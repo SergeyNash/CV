@@ -51,6 +51,29 @@ const fileSystem: FileNode[] = [
     path: '/about.txt',
     type: 'file',
     content: `╔════════════════════════════════════════════════╗
+║                   О СЕБЕ                       ║
+╠════════════════════════════════════════════════╣
+║                                                ║
+║  Привет! Меня зовут Сергей Синяков             ║
+║  Я Product Manager с 8+ годами опыта           ║
+║                                                ║
+║  🎯 СПЕЦИАЛИЗАЦИЯ:                             ║
+║  • B2B SaaS продукты                          ║
+║  • Fintech решения                             ║
+║  • Enterprise платформы                        ║
+║                                                ║
+║  💡 ФИЛОСОФИЯ:                                 ║
+║  "Лучший продукт - тот, который решает         ║
+║   реальную проблему пользователя лучше        ║
+║   всех остальных"                              ║
+║                                                ║
+║  🚀 ПОДХОД:                                    ║
+║  • Data-driven решения                         ║
+║  • Customer-centric мышление                   ║
+║  • Agile методологии                           ║
+║  • Continuous improvement                      ║
+║                                                ║
+╚════════════════════════════════════════════════╝`
   },
   {
     name: 'experience',
@@ -81,7 +104,7 @@ const fileSystem: FileNode[] = [
     name: 'skills.txt',
     path: '/skills.txt',
     type: 'file',
-    content: `╔════════════════════════════════════════════════╗
+    content: \`╔════════════════════════════════════════════════╗
 ║                НАВЫКИ И КОМПЕТЕНЦИИ            ║
 ╠════════════════════════════════════════════════╣
 ║                                                ║
@@ -115,7 +138,7 @@ const fileSystem: FileNode[] = [
     name: 'achievements.txt',
     path: '/achievements.txt',
     type: 'file',
-    content: `╔════════════════════════════════════════════════╗
+    content: \`╔════════════════════════════════════════════════╗
 ║                   ДОСТИЖЕНИЯ                   ║
 ╠════════════════════════════════════════════════╣
 ║                                                ║
@@ -158,7 +181,7 @@ const fileSystem: FileNode[] = [
         name: 'email.vcf',
         path: '/contacts/email.vcf',
         type: 'file',
-        content: `╔════════════════════════════════════════════════╗
+        content: \`╔════════════════════════════════════════════════╗
 ║               КОНТАКТНАЯ ИНФОРМАЦИЯ            ║
 ╠════════════════════════════════════════════════╣
 ║                                                ║
@@ -221,10 +244,10 @@ function App() {
   };
 
   useEffect(() => {
-    // Set default file to about.txt
-    const aboutFile = fileSystem.find(node => node.name === 'about.txt');
-    if (aboutFile) {
-      setSelectedFile(aboutFile);
+    // Set default file to readme.txt
+    const readmeFile = fileSystem.find(node => node.name === 'readme.txt');
+    if (readmeFile) {
+      setSelectedFile(readmeFile);
     }
 
     // Check for mobile
@@ -433,41 +456,9 @@ function App() {
                   })}
                 </div>
               ) : (
-                <div className="text-white text-xs leading-relaxed whitespace-pre-wrap">
-                  {selectedFile.content.includes('[ФОТО: sergey-photo.png]') ? (
-                    <div>
-                      {selectedFile.content.split('[ФОТО: sergey-photo.png]').map((part, index) => (
-                        <span key={index}>
-                          {part}
-                          {index === 0 && (
-                            <div className="my-4 flex justify-center">
-                              <div className="border-2 border-cyan-400 p-2 bg-blue-800">
-                                <img 
-                                  src="/sergey-photo.png" 
-                                  alt="Сергей Синяков" 
-                                  className="w-32 h-32 object-cover border border-green-400"
-                                  onError={(e) => {
-                                    const target = e.target as HTMLImageElement;
-                                    target.style.display = 'none';
-                                    const placeholder = document.createElement('div');
-                                    placeholder.className = 'w-32 h-32 bg-blue-700 border border-green-400 flex items-center justify-center text-green-400 text-xs';
-                                    placeholder.textContent = 'PHOTO\nNOT FOUND';
-                                    target.parentNode?.replaceChild(placeholder, target);
-                                  }}
-                                />
-                                <div className="text-center text-green-400 text-xs mt-1">
-                                  sergey-photo.png
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </span>
-                      ))}
-                    </div>
-                  ) : (
-                    <pre>{selectedFile.content}</pre>
-                  )}
-                </div>
+                <pre className="text-white text-xs leading-relaxed whitespace-pre-wrap">
+                  {selectedFile.content}
+                </pre>
               )
             ) : (
               <div className="text-green-400 text-center mt-8">
