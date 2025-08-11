@@ -57,21 +57,19 @@ const fileSystem: FileNode[] = [
 ║  Привет! Меня зовут Сергей Синяков             ║
 ║  Я Product Manager с 8+ годами опыта           ║
 ║                                                ║
-║  🎯 СПЕЦИАЛИЗАЦИЯ:                             ║
-║  • B2B SaaS продукты                          ║
-║  • Fintech решения                             ║
-║  • Enterprise платформы                        ║
+║  Специализируюсь на:                           ║
+║  • B2B SaaS продуктах                          ║
+║  • Fintech решениях                            ║
+║  • Data-driven подходе                         ║
 ║                                                ║
-║  💡 ФИЛОСОФИЯ:                                 ║
-║  "Лучший продукт - тот, который решает         ║
-║   реальную проблему пользователя лучше        ║
-║   всех остальных"                              ║
+║  Мой подход:                                   ║
+║  1. Глубокое понимание пользователей           ║
+║  2. Метрики как основа решений                 ║
+║  3. Быстрые итерации и MVP                     ║
+║  4. Кросс-функциональное сотрудничество        ║
 ║                                                ║
-║  🚀 ПОДХОД:                                    ║
-║  • Data-driven решения                         ║
-║  • Customer-centric мышление                   ║
-║  • Agile методологии                           ║
-║  • Continuous improvement                      ║
+║  Люблю сложные задачи и создание продуктов,    ║
+║  которые действительно решают проблемы людей   ║
 ║                                                ║
 ╚════════════════════════════════════════════════╝`
   },
@@ -456,9 +454,41 @@ function App() {
                   })}
                 </div>
               ) : (
-                <pre className="text-white text-xs leading-relaxed whitespace-pre-wrap">
-                  {selectedFile.content}
-                </pre>
+                <div className="text-white text-xs leading-relaxed whitespace-pre-wrap">
+                  {selectedFile.content.includes('[ФОТО: sergey-photo.png]') ? (
+                    <div>
+                      {selectedFile.content.split('[ФОТО: sergey-photo.png]').map((part, index) => (
+                        <span key={index}>
+                          {part}
+                          {index === 0 && (
+                            <div className="my-4 flex justify-center">
+                              <div className="border-2 border-cyan-400 p-2 bg-blue-800">
+                                <img 
+                                  src="/sergey-photo.png" 
+                                  alt="Сергей Синяков" 
+                                  className="w-32 h-32 object-cover border border-green-400"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.style.display = 'none';
+                                    const placeholder = document.createElement('div');
+                                    placeholder.className = 'w-32 h-32 bg-blue-700 border border-green-400 flex items-center justify-center text-green-400 text-xs';
+                                    placeholder.textContent = 'PHOTO\nNOT FOUND';
+                                    target.parentNode?.replaceChild(placeholder, target);
+                                  }}
+                                />
+                                <div className="text-center text-green-400 text-xs mt-1">
+                                  sergey-photo.png
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <pre>{selectedFile.content}</pre>
+                  )}
+                </div>
               )
             ) : (
               <div className="text-green-400 text-center mt-8">
